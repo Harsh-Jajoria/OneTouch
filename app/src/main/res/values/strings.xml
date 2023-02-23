@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">OneTouch</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="blog">Blog</string>
+    <string name="become_a_professional">Store</string>
+    <string name="account">Account</string>
+    <string name="welcome_title">Hello, Welcome Back</string>
+    <string name="welcome_sub_title">What are you looking for?</string>
+    <string name="view_all">View all</string>
+    <string name="banner_text">Explore the greats our services. You won’t be disappointed</string>
+    <string name="most_popular_services">Most Popular Services</string>
+    <string name="our_category">Product Category</string>
+    <string name="our_service_providers">Our Service Providers</string>
+    <string name="best_seller">Best Seller</string>
+    <string name="blogs">Blogs</string>
+    <string name="demo_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="categories">Categories</string>
+    <string name="trending_products">Trending Products</string>
+    <string name="popular_products">Popular Products</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="added_to_cart">Remove from cart</string>
+    <string name="welcome_to_onetouch">Welcome to OneTouch</string>
+    <string name="join_as_a_provider">Join As A Provider</string>
+    <string-array name="time_slot">
+        <item>10:00 AM</item>
+        <item>11:00 AM</item>
+        <item>12:00 PM</item>
+        <item>01:00 PM</item>
+        <item>02:00 PM</item>
+        <item>03:00 PM</item>
+        <item>04:00 PM</item>
+        <item>05:00 PM</item>
+        <item>06:00 PM</item>
+        <item>07:00 PM</item>
+    </string-array>
+
+</resources>
