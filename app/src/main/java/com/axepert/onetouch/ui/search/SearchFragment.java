@@ -23,6 +23,7 @@ import com.axepert.onetouch.adapters.AdapterSearchResult;
 import com.axepert.onetouch.databinding.FragmentSearchBinding;
 import com.axepert.onetouch.listeners.SearchListener;
 import com.axepert.onetouch.responses.SearchProductResponse;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,11 +80,16 @@ public class SearchFragment extends Fragment implements SearchListener {
     private void search(String item) {
         binding.progress.setVisibility(View.VISIBLE);
         viewModel.searchProduct(item).observe(this, searchProductResponse -> {
-            if (searchProductResponse.code == 200) {
-                searchList.addAll(searchProductResponse.data);
-                adapterSearchResult.notifyDataSetChanged();
-                binding.progress.setVisibility(View.GONE);
+            if (searchProductResponse != null) {
+                if (searchProductResponse.code == 200) {
+                    searchList.addAll(searchProductResponse.data);
+                    adapterSearchResult.notifyDataSetChanged();
+                    binding.progress.setVisibility(View.GONE);
+                } else {
+                    binding.progress.setVisibility(View.GONE);
+                }
             } else {
+                Toast.makeText(requireActivity(), "Unable to get data.", Toast.LENGTH_LONG).show();
                 binding.progress.setVisibility(View.GONE);
             }
         });

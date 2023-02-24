@@ -2,7 +2,7 @@ package com.axepert.onetouch.utilities;
 
 public class Constants {
     public static final String KEY_PREF_NAME = "prefName";
-    public static final String KEY_BASE_URL = "https://axepertexhibits.com/demonetouch/";
+    public static final String KEY_BASE_URL = "http://1onetouch.com/";
     public static final String KEY_IS_LOGIN = "isLogin";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_EMAIL = "email";

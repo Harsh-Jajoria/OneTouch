@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="@color/background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -307,5 +308,36 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieComingSoon"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_centerInParent="true"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/coming_soon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coming Soon"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_below="@id/lottieComingSoon"
+            android:shadowColor="@color/secondary_text"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_24ssp"
+            android:textColor="@color/primary_text"
+            android:fontFamily="@font/poppins_bold"
+            android:includeFontPadding="false"/>
+
+    </RelativeLayout>
 
 </FrameLayout>

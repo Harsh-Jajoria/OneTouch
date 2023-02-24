@@ -155,6 +155,8 @@ public class HomeFragment extends Fragment implements ServicesListener, BestSell
                     adapterBlogs.notifyDataSetChanged();
                     binding.swipeRefresh.setRefreshing(false);
 
+                    binding.tvNotFound.setVisibility(View.GONE);
+                    binding.swipeRefresh.setVisibility(View.VISIBLE);
                     loading(false);
                 } else {
                     loading(false);
@@ -217,9 +219,9 @@ public class HomeFragment extends Fragment implements ServicesListener, BestSell
 
     @Override
     public void onOurCategoryClicked(Category category) {
-        Bundle bundle = new Bundle();
+        /*Bundle bundle = new Bundle();
         bundle.putString("cat_id", category.getId());
         bundle.putString("cat_name", category.getCategory_name());
-        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_to_productByCategoryFragment, bundle);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_to_productByCategoryFragment, bundle);*/
     }
 }

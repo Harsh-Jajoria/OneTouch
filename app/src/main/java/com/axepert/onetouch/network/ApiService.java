@@ -1,10 +1,12 @@
 package com.axepert.onetouch.network;
 
 import com.axepert.onetouch.requests.AddAddressRequest;
+import com.axepert.onetouch.requests.AddBlogRequest;
 import com.axepert.onetouch.requests.AddReviewRequest;
 import com.axepert.onetouch.requests.AddressListRequest;
 import com.axepert.onetouch.requests.BookServiceRequest;
 import com.axepert.onetouch.requests.ChangePasswordRequest;
+import com.axepert.onetouch.requests.DashboradRequest;
 import com.axepert.onetouch.requests.EditProfileRequest;
 import com.axepert.onetouch.requests.InvoiceRequest;
 import com.axepert.onetouch.requests.LoginRequest;
@@ -22,6 +24,7 @@ import com.axepert.onetouch.responses.AddReviewResponse;
 import com.axepert.onetouch.responses.AddressListResponse;
 import com.axepert.onetouch.responses.BookServiceResponse;
 import com.axepert.onetouch.responses.ChangePasswordResponse;
+import com.axepert.onetouch.responses.DashboardResponse;
 import com.axepert.onetouch.responses.ECommHomePageResponse;
 import com.axepert.onetouch.responses.EditProfileResponse;
 import com.axepert.onetouch.responses.HomeScreenResponse;
@@ -118,14 +121,10 @@ public interface ApiService {
     @POST("onetouch/api/Userorder/userorderdetails")
     Call<InvoiceResponse> invoice(@Body InvoiceRequest invoiceRequest);
 
-    @Multipart
-    @POST("")
-    Call<Response> addBlog(@Part("name") RequestBody name,
-                           @Part("email") RequestBody email,
-                           @Part("contact") RequestBody contact,
-                           @Part("title") RequestBody title,
-                           @Part("description") RequestBody description,
-                           @Part("category") RequestBody category,
-                           @Part MultipartBody.Part filename );
+    @POST("api/Register/add_blog2")
+    Call<PlaceOrderResponse> addBlog(@Body AddBlogRequest addBlogRequest);
+
+    @POST("api/User_profile/seller_dashboard")
+    Call<DashboardResponse> dashboard(@Body DashboradRequest dashboradRequest);
 
 }

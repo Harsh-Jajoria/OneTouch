@@ -30,7 +30,11 @@ public class BlogInfoFragment extends Fragment {
 
     private void setListener() {
         binding.imgBack.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).popBackStack());
-        binding.btnAddBlog.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_blogInfoFragment_to_addBlogFragment));
+        binding.btnAddBlog.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("cat", binding.tvServiceCategory.getText().toString());
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_blogInfoFragment_to_addBlogFragment, bundle);
+        });
     }
 
     private void setBlogDetails() {
