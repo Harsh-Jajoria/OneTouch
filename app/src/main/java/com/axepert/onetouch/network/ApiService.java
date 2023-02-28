@@ -7,9 +7,11 @@ import com.axepert.onetouch.requests.AddressListRequest;
 import com.axepert.onetouch.requests.BookServiceRequest;
 import com.axepert.onetouch.requests.ChangePasswordRequest;
 import com.axepert.onetouch.requests.DashboradRequest;
+import com.axepert.onetouch.requests.EditDealerProfileRequest;
 import com.axepert.onetouch.requests.EditProfileRequest;
 import com.axepert.onetouch.requests.InvoiceRequest;
 import com.axepert.onetouch.requests.LoginRequest;
+import com.axepert.onetouch.requests.MyServiceCategoryRequest;
 import com.axepert.onetouch.requests.OrderCodRequest;
 import com.axepert.onetouch.requests.OrderOnlineRequest;
 import com.axepert.onetouch.requests.ProductByCarRequest;
@@ -19,6 +21,7 @@ import com.axepert.onetouch.requests.RegisterRequest;
 import com.axepert.onetouch.requests.RelatedProductRequest;
 import com.axepert.onetouch.requests.RelatedServiceProvidersRequest;
 import com.axepert.onetouch.requests.SearchProductRequest;
+import com.axepert.onetouch.requests.SubCategoryRequest;
 import com.axepert.onetouch.responses.AddAddressResponse;
 import com.axepert.onetouch.responses.AddReviewResponse;
 import com.axepert.onetouch.responses.AddressListResponse;
@@ -30,6 +33,8 @@ import com.axepert.onetouch.responses.EditProfileResponse;
 import com.axepert.onetouch.responses.HomeScreenResponse;
 import com.axepert.onetouch.responses.InvoiceResponse;
 import com.axepert.onetouch.responses.LoginResponse;
+import com.axepert.onetouch.responses.MyServiceCategoryResponse;
+import com.axepert.onetouch.responses.MyServiceSubCategoryResponse;
 import com.axepert.onetouch.responses.OrdersResponse;
 import com.axepert.onetouch.responses.PlaceOrderResponse;
 import com.axepert.onetouch.responses.ProductByCatResponse;
@@ -38,17 +43,13 @@ import com.axepert.onetouch.responses.ProductListResponse;
 import com.axepert.onetouch.responses.RegistrationResponse;
 import com.axepert.onetouch.responses.RelatedProductResponse;
 import com.axepert.onetouch.responses.RelatedServiceProvidersResponse;
+import com.axepert.onetouch.responses.ReviewsResponse;
 import com.axepert.onetouch.responses.SearchProductResponse;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 public interface ApiService {
 
@@ -126,5 +127,20 @@ public interface ApiService {
 
     @POST("api/User_profile/seller_dashboard")
     Call<DashboardResponse> dashboard(@Body DashboradRequest dashboradRequest);
+
+    @POST("api/HomeScreen/get_cat_by_seller")
+    Call<MyServiceCategoryResponse> myServiceCategory(@Body MyServiceCategoryRequest myServiceCategoryRequest);
+
+    @POST("api/HomeScreen/get_sub_cat_by_seller")
+    Call<MyServiceSubCategoryResponse> myServiceSubCategory(@Body MyServiceCategoryRequest myServiceCategoryRequest);
+
+    @POST("api/HomeScreen/get_reviews")
+    Call<ReviewsResponse> myReviews(@Body MyServiceCategoryRequest myServiceCategoryRequest);
+
+    @POST("api/user_profile/subcategourybyid")
+    Call<MyServiceCategoryResponse> subCategory(@Body SubCategoryRequest subCategoryRequest);
+
+    @POST("api/Register/user_details_update")
+    Call<PlaceOrderResponse> editDealerProfile(@Body EditDealerProfileRequest editDealerProfileRequest);
 
 }

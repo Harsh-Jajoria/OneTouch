@@ -61,13 +61,19 @@ public class AccountFragment extends Fragment {
     private void setListener() {
         binding.llLogout.setOnClickListener(v -> {
             preferenceManager.clear();
-            Navigation.findNavController(v).popBackStack();
+            Toast.makeText(requireActivity(), "Successfully logged out", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(requireActivity(), MainActivity.class));
+            requireActivity().finish();
+//            Navigation.findNavController(v).popBackStack();
         });
         binding.llAddress.setOnClickListener(v -> {
             Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_addressesFragment);
         });
         binding.llMyServices.setOnClickListener(v -> {
             Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_myServicesFragment);
+        });
+        binding.llReviews.setOnClickListener(v -> {
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_reviewsFragment);
         });
         binding.llOrders.setOnClickListener(v -> {
             Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_myOrdersFragment);

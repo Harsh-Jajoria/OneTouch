@@ -133,6 +133,9 @@
         <action
             android:id="@+id/action_nav_account_to_myServicesFragment"
             app:destination="@id/myServicesFragment" />
+        <action
+            android:id="@+id/action_nav_account_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -293,4 +296,9 @@
         android:name="com.axepert.onetouch.ui.myservices.MyServicesFragment"
         android:label="fragment_my_services"
         tools:layout="@layout/fragment_my_services" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.axepert.onetouch.ui.reviews.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" />
 </navigation>

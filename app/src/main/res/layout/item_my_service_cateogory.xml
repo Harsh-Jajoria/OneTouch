@@ -26,13 +26,13 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_10ssp"
             android:textSize="@dimen/_14ssp"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/background_fading_edge"/>
+            android:background="#80000000"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

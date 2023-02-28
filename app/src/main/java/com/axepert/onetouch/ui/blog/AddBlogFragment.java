@@ -145,6 +145,7 @@ public class AddBlogFragment extends Fragment {
                             Bitmap photo = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
                             binding.imgBlogImage.setImageBitmap(photo);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                             byte[] bytes = stream.toByteArray();
                             encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
                             binding.imgBlogImage.setVisibility(View.VISIBLE);

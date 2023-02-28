@@ -42,20 +42,20 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginHorizontal="@dimen/_13sdp"
-            app:tabIndicatorHeight="45dp"
+            android:layout_marginTop="@dimen/_20sdp"
             app:tabIndicator="@drawable/login_tab_background"
-            app:tabSelectedTextColor="@color/white"
-            android:layout_marginTop="@dimen/_20sdp">
+            app:tabIndicatorHeight="45dp"
+            app:tabSelectedTextColor="@color/white">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User"/>
+                android:text="User" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dealer"/>
+                android:text="Dealer" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -78,7 +78,8 @@
                 android:includeFontPadding="false"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:textColor="@color/primary_text" />
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,11 +88,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_13sdp"
-            android:hint="Mobile No.">
+            android:hint="Mobile No."
+            android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tvPhone"
@@ -101,8 +102,8 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:includeFontPadding="false"
-                android:maxLength="10"
                 android:inputType="phone"
+                android:maxLength="10"
                 android:maxLines="1"
                 android:textColor="@color/primary_text" />
 
@@ -127,7 +128,8 @@
                 android:includeFontPadding="false"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:textColor="@color/primary_text" />
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,7 +140,7 @@
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_13sdp"
-            android:hint="Enter Password"
+            android:hint="Password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -151,7 +153,8 @@
                 android:includeFontPadding="false"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textColor="@color/primary_text" />
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -175,7 +178,8 @@
                 android:includeFontPadding="false"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:textColor="@color/primary_text" />
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_12ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

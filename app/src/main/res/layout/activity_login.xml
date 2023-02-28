@@ -65,7 +65,7 @@
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_13sdp"
-            android:hint="Username or Email">
+            android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tvEmail"
@@ -75,6 +75,7 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:includeFontPadding="false"
+                android:textSize="@dimen/_12ssp"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@color/primary_text" />
@@ -88,7 +89,7 @@
             android:layout_marginStart="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_13sdp"
-            android:hint="Your Password"
+            android:hint="Password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -99,6 +100,7 @@
                 android:imeOptions="actionNext"
                 android:importantForAutofill="no"
                 android:includeFontPadding="false"
+                android:textSize="@dimen/_12ssp"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@color/primary_text" />

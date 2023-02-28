@@ -1,66 +1,94 @@
 package com.axepert.onetouch.ui.myservices;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.axepert.onetouch.R;
+import com.axepert.onetouch.adapters.AdapterMyServiceCategory;
+import com.axepert.onetouch.databinding.FragmentServiceCategoryBinding;
+import com.axepert.onetouch.network.ApiClient;
+import com.axepert.onetouch.network.ApiService;
+import com.axepert.onetouch.requests.MyServiceCategoryRequest;
+import com.axepert.onetouch.responses.MyServiceCategoryResponse;
+import com.axepert.onetouch.utilities.Constants;
+import com.axepert.onetouch.utilities.PreferenceManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ServiceCategoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ServiceCategoryFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ServiceCategoryFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ServiceCategoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ServiceCategoryFragment newInstance(String param1, String param2) {
-        ServiceCategoryFragment fragment = new ServiceCategoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentServiceCategoryBinding binding;
+    private PreferenceManager preferenceManager;
+    private List<MyServiceCategoryResponse.Datum> myServiceCatList;
+    private AdapterMyServiceCategory adapterMyServiceCategory;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentServiceCategoryBinding.inflate(getLayoutInflater(), container, false);
+        init();
+        getMyCategories();
+        return binding.getRoot();
+    }
+
+    private void init() {
+        preferenceManager = new PreferenceManager(requireContext());
+        binding.recyclerViewServiceCategory.setHasFixedSize(true);
+        myServiceCatList = new ArrayList<>();
+        adapterMyServiceCategory = new AdapterMyServiceCategory(myServiceCatList);
+        binding.recyclerViewServiceCategory.setAdapter(adapterMyServiceCategory);
+    }
+
+    private void getMyCategories() {
+        try {
+
+            MyServiceCategoryRequest myServiceCategoryRequest = new MyServiceCategoryRequest(preferenceManager.getString(Constants.KEY_USER_ID));
+
+            ApiClient.getRetrofit().create(ApiService.class).myServiceCategory(myServiceCategoryRequest)
+                    .enqueue(new Callback<MyServiceCategoryResponse>() {
+                        @SuppressLint("NotifyDataSetChanged")
+                        @Override
+                        public void onResponse(@NonNull Call<MyServiceCategoryResponse> call, @NonNull Response<MyServiceCategoryResponse> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                if (response.body().code == 200) {
+                                    myServiceCatList.addAll(response.body().data);
+                                    adapterMyServiceCategory.notifyDataSetChanged();
+                                    binding.progress.setVisibility(View.GONE);
+                                    binding.recyclerViewServiceCategory.setVisibility(View.VISIBLE);
+                                } else {
+                                    binding.progress.setVisibility(View.GONE);
+                                }
+                            } else {
+                                binding.progress.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<MyServiceCategoryResponse> call, @NonNull Throwable t) {
+                            Toast.makeText(requireContext(), "Failed due to : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            binding.progress.setVisibility(View.GONE);
+                        }
+                    });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(requireContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            binding.progress.setVisibility(View.GONE);
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_service_category, container, false);
-    }
 }

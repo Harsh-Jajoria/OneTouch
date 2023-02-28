@@ -62,6 +62,7 @@ public class ServiceDetailsFragment extends Fragment {
             bundle.putString("service_name", getArguments().getString("category"));
             Navigation.findNavController(v).navigate(R.id.action_serviceDetailsFragment_to_bookServiceFragment2, bundle);
         });
+        binding.imgBack.setOnClickListener(v -> Navigation.findNavController(v).popBackStack());
     }
 
     private void initRV() {

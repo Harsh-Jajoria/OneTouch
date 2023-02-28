@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 binding.bottomNavigation.setVisibility(View.GONE);
             } else if (navDestination.getId() == R.id.myServicesFragment) {
                 binding.bottomNavigation.setVisibility(View.GONE);
+            }  else if (navDestination.getId() == R.id.llProfileSettings) {
+                binding.bottomNavigation.setVisibility(View.GONE);
             } else {
                 binding.bottomNavigation.setVisibility(View.VISIBLE);
             }

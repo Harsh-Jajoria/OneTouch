@@ -34,17 +34,50 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutProfile"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:src="@drawable/ic_launcher_background"
+                        app:riv_oval="true"
+                        android:scaleType="centerCrop"
+                        android:layout_marginVertical="@dimen/_15sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <ImageView
+                        android:id="@+id/imgEditProfile"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:src="@drawable/ic_edit"
+                        android:padding="@dimen/_5sdp"
+                        android:background="@drawable/black_cirlce_background"
+                        app:layout_constraintEnd_toEndOf="@id/imgProfile"
+                        app:layout_constraintBottom_toBottomOf="@id/imgProfile"
+                        app:tint="@color/background" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
-                    android:paddingHorizontal="@dimen/_5sdp"
                     android:text="Name"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_11ssp" />
 
                 <EditText
                     android:id="@+id/etName"
@@ -61,19 +94,19 @@
                     android:maxLines="1"
                     android:paddingHorizontal="@dimen/_10sdp"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_11ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:text="Contact"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_11ssp" />
 
                 <EditText
                     android:id="@+id/etContact"
@@ -87,8 +120,8 @@
                     android:imeOptions="actionNext"
                     android:includeFontPadding="false"
                     android:inputType="number"
-                    android:maxLines="1"
                     android:maxLength="10"
+                    android:maxLines="1"
                     android:paddingHorizontal="@dimen/_10sdp"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/_12ssp" />
@@ -105,12 +138,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:text="Shop Name"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
                     <EditText
                         android:id="@+id/etShopName"
@@ -134,87 +167,93 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:text="Category"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
-                    <AutoCompleteTextView
+                    <TextView
                         android:id="@+id/etCategory"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:background="@drawable/text_field_background"
-                        android:drawableEnd="@drawable/ic_drop_down"
                         android:ellipsize="end"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:gravity="center_vertical"
                         android:fontFamily="@font/poppins_regular"
-                        android:imeOptions="actionNext"
                         android:includeFontPadding="false"
-                        android:inputType="none"
                         android:maxLines="1"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_drop_down" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:text="Sub Category"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
-                    <AutoCompleteTextView
+                    <TextView
                         android:id="@+id/etSubCategory"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:background="@drawable/text_field_background"
-                        android:drawableEnd="@drawable/ic_drop_down"
                         android:ellipsize="end"
+                        android:gravity="center_vertical"
                         android:fontFamily="@font/poppins_regular"
-                        android:imeOptions="actionNext"
                         android:includeFontPadding="false"
-                        android:inputType="none"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:maxLines="1"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_drop_down" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:text="Address"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
                     <EditText
                         android:id="@+id/etAddress"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:background="@drawable/text_field_background"
                         android:ellipsize="end"
                         android:fontFamily="@font/poppins_regular"
+                        android:gravity="start"
+                        android:hint="address"
                         android:imeOptions="actionNext"
                         android:includeFontPadding="false"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
                         android:maxLines="1"
+                        android:minHeight="@dimen/_80sdp"
                         android:paddingHorizontal="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_5sdp"
                         android:textColor="@color/primary_text"
                         android:textSize="@dimen/_12ssp" />
 
@@ -223,27 +262,30 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:text="Description"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
                     <EditText
                         android:id="@+id/etDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:background="@drawable/text_field_background"
                         android:ellipsize="end"
                         android:fontFamily="@font/poppins_regular"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
                         android:includeFontPadding="false"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
                         android:maxLines="1"
+                        android:minHeight="@dimen/_80sdp"
                         android:paddingHorizontal="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_5sdp"
                         android:textColor="@color/primary_text"
                         android:textSize="@dimen/_12ssp" />
 
@@ -252,12 +294,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:text="GSTIN"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_11ssp" />
 
                     <EditText
                         android:id="@+id/etGSTIN"
@@ -284,10 +326,12 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_13sdp"
-                    android:text="Update"
                     android:layout_marginBottom="@dimen/_13sdp"
+                    android:text="Save Changes"
+                    android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_11ssp"
+                    app:cornerRadius="0dp" />
 
             </LinearLayout>
 
