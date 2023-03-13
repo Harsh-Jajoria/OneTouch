@@ -54,11 +54,25 @@
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:layout_marginBottom="@dimen/_10sdp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_launcher_background"
+                                android:background="@drawable/black_cirlce_background"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:riv_oval="true" />
+
+                            <TextView
+                                android:id="@+id/tvFirstLatter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_24ssp"
+                                android:textColor="@color/white"
+                                android:visibility="gone"
+                                android:fontFamily="@font/poppins_medium"
+                                android:includeFontPadding="false"
+                                app:layout_constraintTop_toTopOf="@id/profileImage"
+                                app:layout_constraintBottom_toBottomOf="@id/profileImage"
+                                app:layout_constraintStart_toStartOf="@id/profileImage"
+                                app:layout_constraintEnd_toEndOf="@id/profileImage"/>
 
                             <View
                                 android:id="@+id/helperView"
@@ -76,7 +90,6 @@
                                 android:layout_marginHorizontal="@dimen/_10sdp"
                                 android:fontFamily="@font/poppins_bold"
                                 android:includeFontPadding="false"
-                                android:text="Username"
                                 android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_12ssp"
                                 app:layout_constraintBottom_toTopOf="@id/helperView"
@@ -90,7 +103,6 @@
                                 android:layout_marginHorizontal="@dimen/_10sdp"
                                 android:fontFamily="@font/poppins_medium"
                                 android:includeFontPadding="false"
-                                android:text="email@gmail.com"
                                 android:textColor="@color/secondary_text"
                                 android:textSize="@dimen/_10ssp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -192,6 +204,32 @@
                                     android:includeFontPadding="false"
                                     android:padding="@dimen/_10sdp"
                                     android:text="My Address"
+                                    android:textColor="@color/primary_text"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:src="@drawable/ic_arrow_right" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llUpdateVideo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:includeFontPadding="false"
+                                    android:padding="@dimen/_10sdp"
+                                    android:text="Update Video"
                                     android:textColor="@color/primary_text"
                                     android:textSize="@dimen/_10ssp" />
 

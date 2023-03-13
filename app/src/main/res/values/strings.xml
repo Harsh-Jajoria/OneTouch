@@ -23,6 +23,10 @@
     <string name="added_to_cart">Remove from cart</string>
     <string name="welcome_to_onetouch">Welcome to OneTouch</string>
     <string name="join_as_a_provider">Join As A Provider</string>
+    <string name="otp_hint">••••••</string>
+    <string name="otp_verification">We have sent a verification code to your email address.</string>
+    <string name="submit">Submit</string>
+    <string name="verification">Verification</string>
     <string-array name="time_slot">
         <item>10:00 AM</item>
         <item>11:00 AM</item>

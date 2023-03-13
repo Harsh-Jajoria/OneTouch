@@ -1,5 +1,6 @@
 package com.axepert.onetouch.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.axepert.onetouch.R;
 import com.axepert.onetouch.databinding.ItemServiceProviderGridBinding;
 import com.axepert.onetouch.responses.ServiceProviders;
+import com.axepert.onetouch.responses.Services;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +38,12 @@ public class AdapterAllServiceProviders extends RecyclerView.Adapter<AdapterAllS
     @Override
     public void onBindViewHolder(@NonNull AllServiceProvidersViewHolder holder, int position) {
         holder.setData(serviceProvidersList.get(position));
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void filterList(List<ServiceProviders> serviceProviders) {
+        serviceProvidersList = serviceProviders;
+        notifyDataSetChanged();
     }
 
     @Override

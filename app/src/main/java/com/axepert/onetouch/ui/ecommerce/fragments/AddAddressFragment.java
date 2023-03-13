@@ -180,7 +180,7 @@ public class AddAddressFragment extends Fragment {
 
     private void showProgress() {
         progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setTitle("Please wait...");
+        progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
     }

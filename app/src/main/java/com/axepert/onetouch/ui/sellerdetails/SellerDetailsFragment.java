@@ -1,8 +1,10 @@
 package com.axepert.onetouch.ui.sellerdetails;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +19,12 @@ import androidx.navigation.Navigation;
 import com.axepert.onetouch.R;
 import com.axepert.onetouch.databinding.FragmentSellerDetailsBinding;
 import com.axepert.onetouch.requests.AddReviewRequest;
+import com.axepert.onetouch.ui.video.VideoActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class SellerDetailsFragment extends Fragment {
     private FragmentSellerDetailsBinding binding;
@@ -67,6 +71,10 @@ public class SellerDetailsFragment extends Fragment {
         } else {
             binding.videoLayout.setVisibility(View.GONE);
         }
+
+        binding.videoView.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), VideoActivity.class).putExtra("url", url));
+        });
     }
 
     private void setSellerDetails() {
@@ -97,6 +105,12 @@ public class SellerDetailsFragment extends Fragment {
     private boolean isValid() {
         if (Objects.requireNonNull(binding.etName.getText()).toString().isEmpty()) {
             showToast("Enter your name");
+            return false;
+        } else if (Objects.requireNonNull(binding.etEmail.getText()).toString().isEmpty()) {
+            showToast("Enter email address");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.getText().toString()).matches()) {
+            showToast("Enter correct email address");
             return false;
         } else if (Objects.requireNonNull(binding.etContact.getText()).toString().isEmpty()) {
             showToast("Enter your contact number");

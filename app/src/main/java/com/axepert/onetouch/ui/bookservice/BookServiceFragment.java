@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,13 @@ public class BookServiceFragment extends Fragment {
         if (binding.tvName.getText().toString().isEmpty()) {
             showToast("Enter your name");
             return false;
-        } else if (binding.tvContact.getText().toString().isEmpty()) {
+        } else if (binding.tvEmail.getText().toString().isEmpty()) {
+            showToast("Enter email address");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(binding.tvEmail.getText().toString()).matches()) {
+            showToast("Enter correct email address");
+            return false;
+        }else if (binding.tvContact.getText().toString().isEmpty()) {
             showToast("Enter your contact number");
             return false;
         } else if (binding.tvContact.getText().toString().trim().length() != 10) {

@@ -2,17 +2,14 @@ package com.axepert.onetouch.ui.ecommerce.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.axepert.onetouch.R;
 import com.axepert.onetouch.adapters.AdapterOrders;
@@ -20,6 +17,7 @@ import com.axepert.onetouch.databinding.FragmentMyOrdersBinding;
 import com.axepert.onetouch.listeners.OrdersListener;
 import com.axepert.onetouch.responses.OrdersResponse;
 import com.axepert.onetouch.ui.ecommerce.viewmodel.OrderViewModel;
+import com.axepert.onetouch.utilities.Constants;
 import com.axepert.onetouch.utilities.PreferenceManager;
 
 import java.util.ArrayList;
@@ -37,7 +35,6 @@ public class MyOrdersFragment extends Fragment implements OrdersListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentMyOrdersBinding.inflate(getLayoutInflater(), container, false);
-        viewModel = new ViewModelProvider(this).get(OrderViewModel.class);
         init();
         fetchOrder();
         setListener();
@@ -53,6 +50,8 @@ public class MyOrdersFragment extends Fragment implements OrdersListener {
     }
 
     private void init() {
+        viewModel = new ViewModelProvider(this).get(OrderViewModel.class);
+        preferenceManager = new PreferenceManager(requireContext());
         binding.ordersRecyclerView.setHasFixedSize(true);
         orderList = new ArrayList<>();
         adapterOrders = new AdapterOrders(orderList, this);
@@ -62,7 +61,7 @@ public class MyOrdersFragment extends Fragment implements OrdersListener {
     @SuppressLint("NotifyDataSetChanged")
     private void fetchOrder() {
         loading(true);
-        viewModel.orders("163").observe(getViewLifecycleOwner(), ordersResponse -> {
+        viewModel.orders(preferenceManager.getString(Constants.KEY_USER_ID)).observe(getViewLifecycleOwner(), ordersResponse -> {
             if (ordersResponse != null) {
                 if (ordersResponse.code == 200) {
                     orderList.addAll(ordersResponse.data);
@@ -73,9 +72,11 @@ public class MyOrdersFragment extends Fragment implements OrdersListener {
                     loading(false);
                 } else {
                     loading(false);
+                    binding.imgEmptyBox.setVisibility(View.VISIBLE);
                 }
             } else {
                 loading(false);
+                binding.imgEmptyBox.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -48,6 +48,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,7 @@ public class EditProfileFragment extends Fragment implements ServiceCategoryList
     }
 
     private void setListeners() {
+        binding.toolbar.setNavigationOnClickListener(v -> Navigation.findNavController(v).popBackStack());
         binding.btnUpdate.setOnClickListener(v -> {
             if (preferenceManager.getString(Constants.KEY_ROLE).equals("user")) {
                 editUserProfile();
@@ -180,7 +182,6 @@ public class EditProfileFragment extends Fragment implements ServiceCategoryList
                     progressDialog.dismiss();
                     Toast.makeText(requireActivity(), response.status, Toast.LENGTH_SHORT).show();
                     preferenceManager.putString(Constants.KEY_USERNAME, binding.etName.getText().toString().trim());
-                    preferenceManager.putString(Constants.KEY_IMAGE, response.image);
                     preferenceManager.putString(Constants.KEY_PHONE, binding.etContact.getText().toString().trim());
                     preferenceManager.putString(Constants.KEY_SHOP_NAME, binding.etShopName.getText().toString().trim());
                     preferenceManager.putString(Constants.KEY_SHOP_ADD, binding.etAddress.getText().toString().trim());
@@ -190,6 +191,11 @@ public class EditProfileFragment extends Fragment implements ServiceCategoryList
                     preferenceManager.putString(Constants.KEY_SUB_CAT_ID, subCatId);
                     preferenceManager.putString(Constants.KEY_CAT_NAME, binding.etCategory.getText().toString().trim());
                     preferenceManager.putString(Constants.KEY_SUB_CAT_NAME, binding.etSubCategory.getText().toString().trim());
+
+                    if(!encodedImage.isEmpty()) {
+                        preferenceManager.putString(Constants.KEY_IMAGE, response.image);
+                    }
+
                     Navigation.findNavController(binding.getRoot()).popBackStack();
                 } else {
                     progressDialog.dismiss();
@@ -289,17 +295,28 @@ public class EditProfileFragment extends Fragment implements ServiceCategoryList
                     Intent data = result.getData();
                     if (data != null) {
                         Uri uri = data.getData();
-                        try {
-                            Bitmap photo = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
-                            binding.imgProfile.setImageBitmap(photo);
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                            byte[] bytes = stream.toByteArray();
-                            encodedImage = Base64.encodeToString(bytes, Base64.DEFAULT);
-                            Log.d("EncodedImage", "EncodedImage : " + encodedImage);
-                            binding.imgProfile.setVisibility(View.VISIBLE);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        String[] filePathColumn = {MediaStore.Video.Media.DATA};
+                        Cursor cursor = requireActivity().getContentResolver().query(uri, filePathColumn, null, null, null);
+                        cursor.moveToFirst();
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        String path = cursor.getString(columnIndex);
+                        File file = new File(path);
+                        int file_size = Integer.parseInt(String.valueOf(file.length()/1024));
+                        if (file_size <= 1024) {
+                            try {
+                                Bitmap photo = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
+                                binding.imgProfile.setImageBitmap(photo);
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                byte[] bytes = stream.toByteArray();
+                                encodedImage = Base64.encodeToString(bytes, Base64.DEFAULT);
+                                Log.d("EncodedImage", "EncodedImage : " + encodedImage);
+                                binding.imgProfile.setVisibility(View.VISIBLE);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(requireActivity(), "File size must be less then 1 MB", Toast.LENGTH_LONG).show();
                         }
                     }
                 }

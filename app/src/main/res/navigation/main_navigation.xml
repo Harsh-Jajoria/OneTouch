@@ -136,6 +136,13 @@
         <action
             android:id="@+id/action_nav_account_to_reviewsFragment"
             app:destination="@id/reviewsFragment" />
+        <action
+            android:id="@+id/action_nav_account_to_editVideoFragment"
+            app:destination="@id/editVideoFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -301,4 +308,9 @@
         android:name="com.axepert.onetouch.ui.reviews.ReviewsFragment"
         android:label="fragment_reviews"
         tools:layout="@layout/fragment_reviews" />
+    <fragment
+        android:id="@+id/editVideoFragment"
+        android:name="com.axepert.onetouch.ui.account.EditVideoFragment"
+        android:label="fragment_edit_video"
+        tools:layout="@layout/fragment_edit_video" />
 </navigation>

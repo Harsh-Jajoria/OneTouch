@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.blog.AddBlogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,19 +16,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:navigationIcon="@drawable/ic_back"
-            app:title="Add Blog"
             android:elevation="1dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Add Blog" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="-55dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,9 +56,9 @@
                         android:importantForAutofill="no"
                         android:includeFontPadding="false"
                         android:inputType="text"
-                        android:textSize="@dimen/_12ssp"
                         android:maxLines="1"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,10 +80,10 @@
                         android:imeOptions="actionNext"
                         android:importantForAutofill="no"
                         android:includeFontPadding="false"
-                        android:textSize="@dimen/_12ssp"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,12 +104,12 @@
                         android:fontFamily="@font/poppins_regular"
                         android:imeOptions="actionNext"
                         android:importantForAutofill="no"
-                        android:textSize="@dimen/_12ssp"
                         android:includeFontPadding="false"
                         android:inputType="phone"
-                        android:maxLines="1"
                         android:maxLength="10"
-                        android:textColor="@color/primary_text" />
+                        android:maxLines="1"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,6 +118,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_13sdp"
@@ -127,12 +130,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:imeOptions="actionNext"
-                        android:textSize="@dimen/_12ssp"
                         android:importantForAutofill="no"
                         android:includeFontPadding="false"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:textColor="@color/primary_text" />
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,6 +144,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_13sdp"
@@ -150,15 +154,15 @@
                         android:id="@+id/etDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="@dimen/_120sdp"
                         android:fontFamily="@font/poppins_regular"
-                        android:imeOptions="actionNext"
-                        android:textSize="@dimen/_12ssp"
-                        android:importantForAutofill="no"
                         android:gravity="start"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
                         android:includeFontPadding="false"
                         android:inputType="textMultiLine"
-                        android:textColor="@color/primary_text" />
+                        android:minHeight="@dimen/_120sdp"
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,9 +170,10 @@
                     android:id="@+id/cvAddImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="@dimen/_1sdp"
+                    android:layout_marginHorizontal="@dimen/_13sdp"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="@dimen/_13sdp">
+                    app:cardElevation="@dimen/_1sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -178,25 +183,25 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Selected Image"
+                            android:layout_marginHorizontal="@dimen/_10ssp"
+                            android:layout_marginVertical="@dimen/_10ssp"
                             android:fontFamily="@font/poppins_regular"
                             android:includeFontPadding="false"
-                            android:textSize="@dimen/_10ssp"
+                            android:text="Selected Image"
                             android:textColor="@color/primary_text"
-                            android:layout_marginHorizontal="@dimen/_10ssp"
-                            android:layout_marginVertical="@dimen/_10ssp"/>
+                            android:textSize="@dimen/_10ssp" />
 
                         <com.google.android.material.divider.MaterialDivider
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                         <ImageView
                             android:id="@+id/imgBlogImage"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_200sdp"
-                            android:visibility="gone"
                             android:layout_marginVertical="@dimen/_10ssp"
-                            android:src="@drawable/ic_launcher_background"/>
+                            android:src="@drawable/ic_launcher_background"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -206,14 +211,27 @@
                     android:id="@+id/btnAddBlog"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Blog"
-                    android:textAllCaps="false"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:includeFontPadding="false"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Add Blog"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_12sdp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGetOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:visibility="gone"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:text="Request OTP"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
+        loading(true);
         viewModel.login(
                 Objects.requireNonNull(binding.tvEmail.getText()).toString().trim(),
                 Objects.requireNonNull(binding.tvPassword.getText()).toString().trim()
@@ -71,23 +73,28 @@ public class LoginActivity extends AppCompatActivity {
                     preferenceManager.putString(Constants.KEY_SUB_CAT_NAME, loginResponse.data.subcat_name);
                     preferenceManager.putString(Constants.KEY_ROLE, "dealer");
                     preferenceManager.putBoolean(Constants.KEY_IS_LOGIN, true);
+                    loading(false);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finishAffinity();
                 } else if (loginResponse.code == 401) {
+                    loading(false);
                     new AlertDialog.Builder(this)
                             .setTitle("Authentication Failed")
                             .setMessage("Your account is not verified yet by the admin team.")
                             .setPositiveButton("Close", (dialog, which) -> dialog.dismiss()).show();
                 } else {
                     showToast(loginResponse.status);
+                    loading(false);
                 }
             } else {
                 showToast("Unable to login right now.");
+                loading(false);
             }
         });
     }
 
     private void userLogin() {
+        loading(true);
         viewModel.userLogin(
                 Objects.requireNonNull(binding.tvEmail.getText()).toString().trim(),
                 Objects.requireNonNull(binding.tvPassword.getText()).toString().trim()
@@ -100,18 +107,22 @@ public class LoginActivity extends AppCompatActivity {
                     preferenceManager.putString(Constants.KEY_IMAGE, loginResponse.data.getImage());
                     preferenceManager.putString(Constants.KEY_PHONE, loginResponse.data.getContact());
                     preferenceManager.putString(Constants.KEY_ROLE, "user");
+                    loading(true);
                     preferenceManager.putBoolean(Constants.KEY_IS_LOGIN, true);
                     LoginActivity.super.onBackPressed();
                 } else if (loginResponse.code == 401) {
+                    loading(false);
                     new AlertDialog.Builder(this)
                             .setTitle("Authentication Failed")
                             .setMessage("Your account is not verified yet by the admin team.")
                             .setPositiveButton("Close", (dialog, which) -> dialog.dismiss()).show();
                 } else {
                     showToast(loginResponse.status);
+                    loading(false);
                 }
             } else {
                 showToast("Unable to login right now.");
+                loading(false);
             }
         });
     }
@@ -133,6 +144,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void loading(boolean isLoading) {
+        if (isLoading){
+            binding.progress.setVisibility(View.VISIBLE);
+            binding.btnLogin.setVisibility(View.GONE);
+        } else {
+            binding.progress.setVisibility(View.GONE);
+            binding.btnLogin.setVisibility(View.VISIBLE);
+        }
     }
 
 }

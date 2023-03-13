@@ -1,13 +1,10 @@
 package com.axepert.onetouch.ui.ecommerce.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,10 +20,8 @@ import com.axepert.onetouch.ui.ecommerce.viewmodel.AddressListViewModel;
 import com.axepert.onetouch.utilities.Constants;
 import com.axepert.onetouch.utilities.PreferenceManager;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class AddressesFragment extends Fragment implements AddressListener {
     private FragmentAddressesBinding binding;
@@ -71,10 +66,14 @@ public class AddressesFragment extends Fragment implements AddressListener {
                     binding.recyclerViewMyAddresses.setVisibility(View.VISIBLE);
                     addressList.addAll(addressListResponse.data);
                     adapterAddress.notifyDataSetChanged();
+                    binding.imgEmptyBox.setVisibility(View.GONE);
                 } else {
                     binding.loading.setVisibility(View.GONE);
-//                Toast.makeText(requireContext(), "No address found", Toast.LENGTH_SHORT).show();
+                    binding.imgEmptyBox.setVisibility(View.VISIBLE);
                 }
+            } else {
+                binding.loading.setVisibility(View.GONE);
+                binding.imgEmptyBox.setVisibility(View.VISIBLE);
             }
         });
     }

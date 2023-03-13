@@ -17,10 +17,10 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:elevation="@dimen/_2sdp"
-            app:navigationIcon="@drawable/ic_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back"
             app:title="Blogs" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -34,13 +34,26 @@
                 android:id="@+id/recyclerViewBlogs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:clipToPadding="false"
+                android:orientation="vertical"
                 android:paddingVertical="@dimen/_13sdp"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_blogs" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ImageView
+            android:id="@+id/imgEmptyBox"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/empty_box"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

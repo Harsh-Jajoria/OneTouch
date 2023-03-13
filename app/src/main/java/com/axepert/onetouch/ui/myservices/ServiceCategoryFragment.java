@@ -70,9 +70,11 @@ public class ServiceCategoryFragment extends Fragment {
                                     binding.recyclerViewServiceCategory.setVisibility(View.VISIBLE);
                                 } else {
                                     binding.progress.setVisibility(View.GONE);
+                                    binding.imgEmptyBox.setVisibility(View.VISIBLE);
                                 }
                             } else {
                                 binding.progress.setVisibility(View.GONE);
+                                binding.imgEmptyBox.setVisibility(View.VISIBLE);
                             }
                         }
 
@@ -80,6 +82,7 @@ public class ServiceCategoryFragment extends Fragment {
                         public void onFailure(@NonNull Call<MyServiceCategoryResponse> call, @NonNull Throwable t) {
                             Toast.makeText(requireContext(), "Failed due to : " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             binding.progress.setVisibility(View.GONE);
+                            binding.imgEmptyBox.setVisibility(View.VISIBLE);
                         }
                     });
 
@@ -88,6 +91,7 @@ public class ServiceCategoryFragment extends Fragment {
             e.printStackTrace();
             Toast.makeText(requireContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
             binding.progress.setVisibility(View.GONE);
+            binding.imgEmptyBox.setVisibility(View.VISIBLE);
         }
     }
 

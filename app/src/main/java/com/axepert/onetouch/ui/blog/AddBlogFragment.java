@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,10 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -26,11 +31,15 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.axepert.onetouch.BuildConfig;
+import com.axepert.onetouch.R;
 import com.axepert.onetouch.databinding.FragmentAddBlogBinding;
 import com.axepert.onetouch.network.ApiClient;
 import com.axepert.onetouch.network.ApiService;
 import com.axepert.onetouch.requests.AddBlogRequest;
 import com.axepert.onetouch.responses.PlaceOrderResponse;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
@@ -44,8 +53,9 @@ import retrofit2.Response;
 
 public class AddBlogFragment extends Fragment {
     private FragmentAddBlogBinding binding;
-    String encodedString, category, TAG = "AddBlogFragment";
+    String encodedString = "", category, TAG = "AddBlogFragment";
     private ProgressDialog progressDialog;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -77,7 +87,8 @@ public class AddBlogFragment extends Fragment {
         binding.toolbar.setNavigationOnClickListener(v -> Navigation.findNavController(binding.getRoot()).popBackStack());
         binding.btnAddBlog.setOnClickListener(v -> {
             if (isValid()) {
-                addBlog();
+//                addBlog();
+                otpBlog();
             }
         });
     }
@@ -215,10 +226,51 @@ public class AddBlogFragment extends Fragment {
             binding.tilDescription.setError("Enter blog description");
             binding.tilDescription.requestFocus();
             return false;
+        } else if (encodedString.isEmpty() || encodedString == null) {
+            Toast.makeText(requireActivity(), "Select Image", Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             binding.tilDescription.setErrorEnabled(false);
             return true;
         }
+    }
+
+    private void otpBlog() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireActivity());
+        BottomSheetBehavior<View> bottomSheetBehavior;
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.otp_bottomsheet, null);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
+
+        LinearLayout otpLL = bottomSheetDialog.findViewById(R.id.otpLL);
+        ImageView imgClose = bottomSheetDialog.findViewById(R.id.imgClose);
+        EditText otpEt = bottomSheetDialog.findViewById(R.id.etOTP);
+        MaterialButton submitButton = bottomSheetDialog.findViewById(R.id.btnSubmit);
+
+        assert otpLL != null;
+        otpLL.setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels/2);
+        assert imgClose != null;
+        imgClose.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        assert submitButton != null;
+        submitButton.setOnClickListener(v -> {
+            assert otpEt != null;
+            if (otpEt.getText().toString().isEmpty()) {
+                Toast.makeText(requireActivity(), "Enter OTP", Toast.LENGTH_SHORT).show();
+            } else if (otpEt.getText().length() != 6) {
+                Toast.makeText(requireActivity(), "OTP must have six digits.", Toast.LENGTH_SHORT).show();
+            } else {
+                String otp = otpEt.getText().toString().trim();
+                verifyOTP(otp);
+            }
+        });
+        bottomSheetDialog.show();
+    }
+
+    private void verifyOTP(String otp) {
+
     }
 
 }

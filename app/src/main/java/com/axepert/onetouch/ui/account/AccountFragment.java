@@ -3,15 +3,14 @@ package com.axepert.onetouch.ui.account;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.axepert.onetouch.MainActivity;
 import com.axepert.onetouch.R;
@@ -64,39 +63,30 @@ public class AccountFragment extends Fragment {
             Toast.makeText(requireActivity(), "Successfully logged out", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(requireActivity(), MainActivity.class));
             requireActivity().finish();
-//            Navigation.findNavController(v).popBackStack();
         });
-        binding.llAddress.setOnClickListener(v -> {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_addressesFragment);
-        });
-        binding.llMyServices.setOnClickListener(v -> {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_myServicesFragment);
-        });
-        binding.llReviews.setOnClickListener(v -> {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_reviewsFragment);
-        });
-        binding.llOrders.setOnClickListener(v -> {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_myOrdersFragment);
-        });
-        binding.llChangePassword.setOnClickListener(v -> {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_changePasswordFragment);
-        });
-        binding.llProfileSettings.setOnClickListener(v -> {
-            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_editProfileFragment);
-        });
+        binding.llAddress.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_addressesFragment));
+        binding.llMyServices.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_myServicesFragment));
+        binding.llReviews.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_reviewsFragment));
+        binding.llOrders.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_myOrdersFragment));
+        binding.llChangePassword.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_changePasswordFragment));
+        binding.llProfileSettings.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_editProfileFragment));
+        binding.llUpdateVideo.setOnClickListener(v -> Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_account_to_editVideoFragment));
     }
 
     private void showingDataAccordingUserType() {
         if (preferenceManager.getString(Constants.KEY_ROLE).equals("user")) {
             binding.recyclerViewDashboard.setVisibility(View.GONE);
             binding.llMyServices.setVisibility(View.GONE);
+            binding.llUpdateVideo.setVisibility(View.GONE);
             binding.llReviews.setVisibility(View.GONE);
         } else {
             binding.recyclerViewDashboard.setVisibility(View.VISIBLE);
             binding.llMyServices.setVisibility(View.VISIBLE);
             binding.llReviews.setVisibility(View.VISIBLE);
+            binding.llUpdateVideo.setVisibility(View.VISIBLE);
             binding.llOrders.setVisibility(View.GONE);
             binding.llAddress.setVisibility(View.GONE);
+            binding.llChangePassword.setVisibility(View.GONE);
         }
     }
 
@@ -114,11 +104,18 @@ public class AccountFragment extends Fragment {
                 @Override
                 public void onError(Exception e) {
                     binding.profileImage.animate().alpha(1f).setDuration(300).start();
-                    binding.profileImage.setImageResource(R.drawable.ic_launcher_background);
+                    binding.tvFirstLatter.setVisibility(View.VISIBLE);
+                    binding.tvFirstLatter.setText(preferenceManager.getString(Constants.KEY_USERNAME).substring(0, 2));
+
                 }
             });
+        } else {
+            binding.tvFirstLatter.setVisibility(View.VISIBLE);
+            binding.tvFirstLatter.setText(preferenceManager.getString(Constants.KEY_USERNAME).substring(0, 2));
         }
     }
+
+
 
     private void dashboardContent() {
         binding.recyclerViewDashboard.setHasFixedSize(true);
